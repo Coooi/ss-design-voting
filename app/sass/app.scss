@@ -1,0 +1,31 @@
+@import "vendor";
+@import "hide";
+@import "mixins";
+@import "typography";
+@import "variables";
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Open Sans', sans-serif !important;
+    @media #{$medium-and-down} {
+        overflow-x: hidden;
+    }
+}
+
+.container--index {
+    text-align: center;
+    h1 {
+        font-size: 40px;
+        font-weight: 300;
+    }
+}
+
+.nopadding {
+    padding: 0 !important;
+}
+p {
+    margin: 0 !important;
+}
+
+@import "design-search-box";

@@ -1,0 +1,19 @@
+{
+  "name": "spreadshirt-test",
+  "description": "Marco Nascimento's assessment.",
+  "main": "",
+  "authors": [
+    "Marco Nascimento"
+  ],
+  "license": "spreadshirt",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1"
+  }
+}

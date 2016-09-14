@@ -1,0 +1,39 @@
+<section class="container container--main">
+    <div id="designSearchBox">
+
+        <div class="searchbox">
+            <input class="ss-search-input" type="tel" ng-model="$ctrl.designId" ng-keydown="$event.keyCode == 13 && $ctrl.searchDesigns()" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Type a design ID">
+            <button class="ss-btn ss-btn--search" ng-click="$ctrl.searchDesigns()">Search</button>
+        </div>
+        <div class="resultsbox">
+            <div class="resultsbox__no-results" ng-if="$ctrl.rejectedId">
+                <p>No designs were found for the shop id {{$ctrl.rejectedId}}.</p>
+            </div>
+            <ul>
+                <li ng-repeat="design in $ctrl.designs track by $index">
+                    <h4>{{design.name}}</h4>
+                    <div class="resultsbox__item">
+                        <div class="item__img">
+                            <img ng-src="{{design.resources[0].href}}" alt="">
+                        </div>
+                        <div class="item__details">
+                            <div class="item__price">
+                                <span>{{design.symbol}} {{design.price.vatIncluded}}</span>
+                            </div>
+                            <div class="item__voting">
+                                <span class="voting-btn">
+                                    <button class="ss-btn ss-btn--voting ss-btn--like" ng-click="$ctrl.like(design)">Like</button>
+                                </span>
+                                <span class="voting-btn">
+                                    <button class="ss-btn ss-btn--voting ss-btn--dislike" ng-click="$ctrl.dislike(design)">Dislike</button>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</section>
