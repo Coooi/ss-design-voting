@@ -1,31 +1,57 @@
 <section class="container container--main">
     <div id="designSearchBox">
-
         <div class="searchbox">
-            <input class="ss-search-input" type="tel" ng-model="$ctrl.designId" ng-keydown="$event.keyCode == 13 && $ctrl.searchDesigns()" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Type a design ID">
+            <input class="ss-search-input" type="tel" ng-model="$ctrl.shopId" ng-keydown="$event.keyCode == 13 && $ctrl.searchDesigns()" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Type a design ID">
             <button class="ss-btn ss-btn--search" ng-click="$ctrl.searchDesigns()">Search</button>
         </div>
         <div class="resultsbox">
+            <div class="sk-cube-grid" ng-if="$ctrl.showSpinner">
+                <div class="sk-cube sk-cube1"></div>
+                <div class="sk-cube sk-cube2"></div>
+                <div class="sk-cube sk-cube3"></div>
+                <div class="sk-cube sk-cube4"></div>
+                <div class="sk-cube sk-cube5"></div>
+                <div class="sk-cube sk-cube6"></div>
+                <div class="sk-cube sk-cube7"></div>
+                <div class="sk-cube sk-cube8"></div>
+                <div class="sk-cube sk-cube9"></div>
+            </div>
             <div class="resultsbox__no-results" ng-if="$ctrl.rejectedId">
                 <p>No designs were found for the shop id {{$ctrl.rejectedId}}.</p>
             </div>
+            <div class="resultsbox_summary" ng-if="$ctrl.showResults">
+                <div class="summary__header">
+                    Voting Results
+                </div>
+                <div class="summary__item">
+                    Voted designs: {{$ctrl.summary.totalVotes}}
+                </div>
+                <div class="summary__item">
+                    Liked designs: {{$ctrl.summary.liked}}
+                </div>
+                <div class="summary__item">
+                    Disliked designs: {{$ctrl.summary.disliked}}
+                </div>
+            </div>
             <ul>
-                <li ng-repeat="design in $ctrl.designs track by $index">
-                    <h4>{{design.name}}</h4>
+                <li ng-repeat="design in $ctrl.designs track by design.id" class="render-design">
+                    <div class="resultsbox__header">
+                        <h4>{{design.name}}</h4>
+                    </div>
                     <div class="resultsbox__item">
                         <div class="item__img">
                             <img ng-src="{{design.resources[0].href}}" alt="">
                         </div>
                         <div class="item__details">
                             <div class="item__price">
-                                <span>{{design.symbol}} {{design.price.vatIncluded}}</span>
+                                <span>{{design.price.vatIncluded | currency:design.symbol}}</span>
                             </div>
                             <div class="item__voting">
                                 <span class="voting-btn">
-                                    <button class="ss-btn ss-btn--voting ss-btn--like" ng-click="$ctrl.like(design)">Like</button>
+                                    <button class="ss-btn ss-btn--voting ss-btn--like" ng-click="$ctrl.like(design)" ng-disabled="$ctrl.getVote(design.id) === 1" ng-class="{'ss-btn--disabled': $ctrl.getVote(design.id) === 1}">Like</button>
                                 </span>
                                 <span class="voting-btn">
-                                    <button class="ss-btn ss-btn--voting ss-btn--dislike" ng-click="$ctrl.dislike(design)">Dislike</button>
+                                    <button class="ss-btn ss-btn--voting ss-btn--dislike" ng-click="$ctrl.dislike(design)" ng-disabled="$ctrl.getVote(design.id) === 2" ng-class="{'ss-btn--disabled': $ctrl.getVote(design.id) === 2}">Dislike</button>
                                 </span>
                             </div>
 
@@ -34,6 +60,8 @@
                 </li>
             </ul>
         </div>
-
+        <div class="finishVoting" ng-if="$ctrl.designs.length">
+            <button class="ss-btn ss-btn--finish" ng-click="$ctrl.finishVoting()">Finish Voting</button>
+        </div>
     </div>
 </section>

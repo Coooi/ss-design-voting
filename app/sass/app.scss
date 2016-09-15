@@ -18,6 +18,9 @@ body {
     h1 {
         font-size: 40px;
         font-weight: 300;
+        @media #{$small_and-down} {
+            font-size: 26px;
+        }
     }
 }
 

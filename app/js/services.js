@@ -5,23 +5,33 @@
 
         .service('ApiService', function ($http, $q) {
             var designResults = [],
-                baseURL = "http://api.spreadshirt.net/api/v1",
-                shopsEndPoint = "/shops/",
-                designsEndPoint = "/designs",
-                currenciesEndPoint= "/currencies/",
-                queryParams = "?mediaType=json",
-                loadedPrices = [];
+                loadedPrices = [],
+                BASE_URL = "http://api.spreadshirt.net/api/v1",
+                SHOP_ENDPOINT = "/shops/",
+                DESIGNS_ENDPOINT = "/designs",
+                CURRENCIES_ENDPOINT= "/currencies/",
+                QUERY_PARAM = "?mediaType=json";
+                
 
             //Services
             return {
-                getDesignById: getDesignById,
+                getDesignByShopId: getDesignByShopId,
                 getCurrencyById: getCurrencyById
             };
 
-            function getDesignById(id) {
+            /**
+             * @ngdoc method
+             * @name getDesignByShopId
+             * @param {object} shop id captured from the interface.
+             *
+             * @description
+             * Responsible for making the request for all the designs available from the shop id parameter.
+             *
+             */
+            function getDesignByShopId(id) {
 
                 var q = $q.defer(),
-                    url = baseURL + shopsEndPoint + id + designsEndPoint + queryParams;
+                    url = BASE_URL + SHOP_ENDPOINT + id + DESIGNS_ENDPOINT + QUERY_PARAM;
 
                 $http({
                     method: 'GET',
@@ -37,13 +47,22 @@
                 });
 
                 return q.promise;
-
             }
 
+            /**
+             * @ngdoc method
+             * @name getCurrencyById
+             * @param {string} id of the currency of each design on the screen.
+             * @param {object} designId corresponding the design the following currency to be looked up.
+             *
+             * @description
+             * Responsible for making the request for the currency data based on a currency id.
+             *
+             */
             function getCurrencyById(id, designId) {
 
                 var q = $q.defer(),
-                    url = baseURL + currenciesEndPoint + id  + queryParams,
+                    url = BASE_URL + CURRENCIES_ENDPOINT + id  + QUERY_PARAM,
                     currencyResponse = {};
 
                 currencyResponse.designId = designId;

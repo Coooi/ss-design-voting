@@ -10,19 +10,14 @@ gulp.task('copy:html', function () {
 
 });
 
-// gulp.task('copy:css-vendor', function () {
-//   return gulp.src('./bower_components/**/*.min.css')
-//     .pipe(flatten())
-//     .pipe(gulp.dest('./public/css'));
-// });
-
 gulp.task('copy:angular', function () {
     return gulp.src('./bower_components/angular/angular.min.js')
         .pipe(gulp.dest('./public/js/'));
 });
 
 gulp.task('copy:map', function () {
-    return gulp.src('./bower_components/angular/angular.min.js.map')
+    return gulp.src('./bower_components/**/*.min.js.map')
+        .pipe(flatten())
         .pipe(gulp.dest('./public/js/'));
 });
 

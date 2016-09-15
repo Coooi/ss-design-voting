@@ -1,10 +1,13 @@
 @import "mixins";
 @import "variables";
+@import "spinner";
 
 .container--main {
   padding: 0 $xsmall_padding $xsmall_padding $xsmall_padding;
-  margin-top: $default_margin;
   max-width: 560px;
+  @media #{$small_and-down} {
+    margin-top: $xsmall_margin;
+  }
 }
 #designSearchBox {
   background-color: $ss-light-color;
@@ -19,28 +22,36 @@
     .resultsbox__no-results {
       text-align: center;
       p {
-        font-weight: 300;
+        font-weight: $normal;
       }
     }
-    margin-top: $default_margin;
     ul {
       padding: 0;
       list-style: none;
       li {
+        -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.35);
+        -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.35);
+        box-shadow: 0 0 5px 0 rgba(0,0,0,0.35);
         h4 {
           margin: 0 0 $xsmall_margin $xsmall_margin;
-          font-size: 20px;
-          font-weight: 300;
+          font-size: $xsmall_size;
+          font-weight: $normal;
+        }
+        .resultsbox__header {
+          padding: $xsmall_padding;
+          background-color: $ss-color;
+          h4 {
+            margin: 0;
+            font-weight: $normal;
+            font-size: 17px;
+            color: $white;
+          }
         }
         .resultsbox__item {
           text-align: center;
-          background-color: #f5f5f5;
-          margin-bottom: $small_margin;
-          margin-top: 5px;
+          background-color: $white;
+          margin-bottom: $default_margin;
           padding: $small_padding;
-          -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.35);
-          -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.35);
-          box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.35);
           img {
             width: 150px;
           }
@@ -49,7 +60,7 @@
               padding: $default_padding 0;
               span {
                 font-size: $small_size;
-                font-weight: 400;
+                font-weight: $medium;
               }
             }
             .item__voting {
@@ -63,7 +74,7 @@
 }
 .ss-search-input {
   border: 1px solid #b3b3b3;
-  background-color: #fff;
+  background-color: $white;
   border-radius: 2px;
   padding: 0 .5em;
   outline: 0;
@@ -73,7 +84,7 @@
   max-width: 300px;
   min-width: 150px;
   width: 60%;
-  font-size: 14px;
+  font-size: $xxsmall_size;
 }
 .ss-btn {
   color: #000;
@@ -87,21 +98,21 @@
 }
 .ss-btn.ss-btn--search {
   height: 36px;
-  background-color: #00b2a5;
-  border-color: #00b2a5;
+  background-color: $ss-color;
+  border-color: $ss-color;
   border-radius: 0 2px 2px 0;
-  color: #FFF;
-  font-weight: 200;
-  font-size: 14px;
+  color: $white;
+  font-weight: $regular;
+  font-size: $xxsmall_size;
 }
 .ss-btn--voting {
   width: 110px;
   height: 30px;
-  border-color: #00b2a5;
-  font-weight: 200;
+  border-color: $ss-color;
+  font-weight: $regular;
   font-size: 12px;
   border-radius: 0 2px 2px 0;
-  color: #FFF;
+  color: $white;
   @include transition(all 0.2s);
   &:hover {
     -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.52);
@@ -111,13 +122,28 @@
 }
 .ss-btn.ss-btn--dislike {
   background-color: #DA000B;
-  margin-left: 10px;
+  margin-left: $xsmall_margin;
   @media #{$small_and-down} {
     margin-left: 5px;
   }
 }
 .ss-btn.ss-btn--like {
   background-color: #3866C2;
+}
+.ss-btn.ss-btn--finish {
+  height: 40px;
+  background-color: $ss-color;
+  border-color: $ss-color;
+  border-radius: 0 2px 2px 0;
+  color: $white;
+  font-weight: $regular;
+  font-size: $xxsmall_size;
+  @include transition(all 0.2s);
+  &:hover {
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.52);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.52);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.52);
+  }
 }
 .voting-btn {
   //display: inline-block;
@@ -130,210 +156,39 @@
     box-shadow: none;
   }
 }
-
-
-/**
-#email-list {
-
-  @media #{$medium-and-down} {
-    position: absolute;
-    background: #4e4e4e;
-    @include zeroBounds();
-    z-index: 1;
-    @include transition(0.4s ease-in-out);
+.finishVoting {
+  text-align: center;
+  padding: $small_padding;
+}
+.resultsbox_summary {
+  -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.35);
+  -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.35);
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.35);
+  .summary__header {
+    background-color: $ss-color;
+    border-color: $ss-color;
+    color: $white;
+    padding: 10px;
+    border-radius: 2px 2px 0 0;
   }
-
-  .list {
-    .list__header {
-      padding-left: 2px;
-      padding-bottom: 5px;
-      padding-top: $xsmall_padding;
-      @media #{$medium-and-down} {
-        padding-left: 8px;
-      }
-      span {
-        color: $white;
-        font-weight: $regular;
-      }
-    }
-    .list__body {
-      min-height: 574px;
-      max-height: 60vh;
-      overflow-y: scroll;
-      background: #f8f8ff;
-      -webkit-box-shadow: inset -5px 7px 9px -6px rgba(0,0,0,0.55);
-      -moz-box-shadow: inset -5px 7px 9px -6px rgba(0,0,0,0.55);
-      box-shadow: inset -5px 7px 9px -6px rgba(0,0,0,0.55);
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        li {
-          padding-left: $xsmall_padding;
-          padding-right: $xsmall_padding;
-          @include transition(background-color 0.25s);
-          &:hover {
-            cursor: pointer;
-            background: grey;
-            span{
-              color: $white !important;
-              
-            }
-            .item__right-info span{
-              &:first-child {
-                opacity: 1!important;
-              }
-            }
-          }
-          .item {
-            display: flex;
-            padding: 5px 0;
-            border-bottom: 1px solid #dad9d9;
-            -moz-justify-content: space-between;
-            -ms-justify-content: space-between;
-            -o-justify-content: space-between;
-            justify-content:  space-between;
-
-            .item__left-info span{
-              display: block;
-
-              &:first-child {
-                color: #2B2922;
-                font-size: 15px;
-                line-height: 28px;
-                max-width: 210px;
-                @include ellipsis();
-              }
-              &:last-child {
-                color: #666666;
-                font-size: 12px;
-                max-width: 210px;
-                @include ellipsis();
-              }
-            }
-            .item__right-info span{
-              &:first-child {
-                padding-top: 12px;
-                padding-bottom: 18px;
-                font-size: $small_padding;
-                line-height: 0px;
-                opacity: 0;
-                &:hover {
-                  color: #000!important;
-                }
-              }
-              text-align: right;
-              display: block;
-              font-size: $xsmall_padding;
-            }
-          }
-        }
-      }
-    }
+  .summary__item {
+    padding: 10px;
+    background-color: $white;
+    font-size: $xxsmall_size;
   }
 }
-
-#email-open {
-  @media #{$medium-and-down} {
-    position: absolute;
-    background: #4e4e4e;
-    @include zeroBounds();
-    z-index: 1;
-    @include transition(0.4s ease-in-out);
-  }
-  .msg-area {
-    padding-left: $xsmall_padding;
-    @media #{$medium-and-down} {
-      padding: 0;
-    }
-    .email-open__title {
-      padding-left: 2px;
-      padding-bottom: 5px;
-      padding-top: $xsmall_padding;
-
-      @media #{$medium-and-down} {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px;
-      }
-      .close-icon {
-        font-size: 22px;
-        color: $white;
-        font-weight: $regular;
-        &:hover {
-          cursor: pointer;
-        }
-        @media #{$medium-and-up} {
-          display: none;
-        }
-      }
-
-      span {
-        color: $white;
-        font-weight: $regular;
-      }
-    }
-    .email-open__message {
-      position: relative;
-      min-height: 554px;
-      max-height: 554px;
-      background: $white;
-      padding: $xsmall_padding;
-      .no-msg {
-        position: absolute;
-        @include zeroBounds();
-        @include flex-center();
-        span {
-          font-size: $small_size;
-          color: grey;
-          font-weight: $normal;
-        }
-      }
-      .msg__content {
-        position: absolute;
-        @include zeroBounds();
-        width: 100%;
-        padding: $xsmall_margin 0;
-        .msg__header {
-          font-size: 12px;
-          color: #666666;
-          padding: 0 $xsmall_margin;
-          line-height: 18px;
-          label {
-            font-weight: 600;
-          }
-        }
-        .msg__body {
-          padding: $xsmall_margin;
-          overflow-y: scroll;
-          max-height: 80%;
-          p {
-            font-size: 14px;
-          }
-        }
-      }
-    }
-  }
+.render-design.ng-move,
+.render-design.ng-enter,
+.render-design.ng-leave {
+  transition:all linear 0.5s;
 }
-
-.msg--mobile {
-
+.render-design.ng-leave.ng-leave-active,
+.render-design.ng-move,
+.render-design.ng-enter {
+  opacity: 0;
 }
-.msg--close {
-  @media #{$medium-and-down} {
-    transform: translateX(100%) !important;
-  }
+.render-design.ng-leave,
+.render-design.ng-move.ng-move-active,
+.render-design.ng-enter.ng-enter-active {
+  opacity:1;
 }
-.msg--open {
-  @media #{$medium-and-down} {
-    transform: translateX(0%) !important;
-  }
-}
-
-.email--read {
-  font-weight: 300;
-}
-.email--unread {
-  font-weight: 600;
-}
-**/

@@ -15,12 +15,10 @@ Responsive layout voting component built with AngularJS.
 * Go to the project's folder on the terminal.
 * Run 
 ```
-
 npm install
 ```
 * Run 
 ```
-
 gulp run
 ```
 * The system will run on **localhost:5000**
@@ -29,7 +27,6 @@ gulp run
 
 ```
 <design-search-box></design-search-box>
-
 ```
 
 ### Tech stack ###
