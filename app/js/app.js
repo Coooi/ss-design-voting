@@ -1,9 +1,6 @@
 (function(){
     'use strict';
-    var AppDependencies = [
-        'ui.router',
-        'ngAnimate'
-    ];
+    var AppDependencies = ['ngAnimate'];
 
     angular
         .module('spreadShirtApp', AppDependencies)
