@@ -4,10 +4,10 @@
 * Author: Marco Nascimento
 
 ### About ###
-Responsive layout voting component built with AngularJS.
+Responsive designs voting component built with AngularJS.
 
 ### Working URL ###
-
+http://ss-design-voting.herokuapp.com/
 
 ### Installation ###
 
